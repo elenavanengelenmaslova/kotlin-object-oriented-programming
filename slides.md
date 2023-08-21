@@ -77,25 +77,95 @@ h1 {
 Here is another comment.
 -->
 
-
 ---
 layout: default
 ---
 
 # Table of contents
 
-<Toc minDepth="2" maxDepth="3"></Toc>
+<Toc minDepth="2" maxDepth="2"></Toc>
+
+
+---
+transition: slide-up
+layout: section
+level: 2
+---
+
+# Classes and objects, Data classes, Enum classes
 
 
 ---
 transition: slide-up
 
-level: 2
+level: 3
 ---
 
-# Classes, Objects and Data classes
+# Class relationships
 
-Basic object model
+### "Has-a" Relationships (Composition)
+Example: A `Patient` class **has a** `DentalRecord`.
+
+```plantuml
+@startuml
+
+class Patient {
+  -DentalRecord record
+}
+class DentalRecord {
+}
+Patient --> DentalRecord : has-a
+
+@enduml
+```
+
+---
+
+### "Has-a" Relationships (Composition) types
+
+<v-clicks>
+
+- One-to-one: One instance relates to exactly one other instance.
+
+- One-to-many: One instance relates to multiple other instances.
+
+- Many-to-many: Multiple instances relate to multiple other instances.
+
+- Bidirectional: Mutual association.
+
+</v-clicks>
+
+---
+
+### "Is-a" Relationships (Inheritance)
+Inheritance illustrates the "Is-a" relationship. In our Dental Clinic:
+- A `Dentist` **is a** `DentalPractitioner`.
+- A `Hygienist` **is a** `DentalPractitioner`.
+
+
+```plantuml
+@startuml
+interface DentalPractitioner {
+  +performTreatment(patient: Patient, treatment: Treatment): String
+}
+
+class Dentist {
+}
+
+class Hygienist {
+}
+
+Dentist -up-|> DentalPractitioner : implements
+Hygienist -up-|> DentalPractitioner : implements
+@enduml
+```
+
+---
+transition: slide-up
+
+level: 3
+---
+# Basic object model
 
 ```plantuml {scale: 1}
 @startuml
@@ -145,21 +215,21 @@ transition: slide-up
 
 level: 2
 ---
-# Enum classes
+# Object keyword
 
 ---
 transition: slide-up
 
 level: 2
 ---
-# Inheritance and Interfaces
+# Inheritance, Interfaces and Polymorphism
 
 ---
 transition: slide-up
 
 level: 2
 ---
-# Polymorphism
+# Generics
 
 ---
 level: 2
@@ -169,32 +239,17 @@ level: 2
 ---
 level: 2
 ---
-# Sealed classes
+# Sealed classes and Value classes
 
 ---
 level: 2
 ---
-# Value classes
-
----
-level: 2
----
-# Object keyword
-
----
-level: 2
----
-# Smart casts
+# Smart casts and Destructuring declarations
 
 ---
 level: 2
 ---
 # Annotations
-
----
-level: 2
----
-# Restructuring declarations
 
 ---
 level: 2
