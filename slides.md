@@ -161,6 +161,31 @@ Hygienist -up-|> DentalPractitioner : implements
 ```
 
 ---
+
+### "Is-a" Relationships (Inheritance) types
+
+<v-clicks>
+
+- Single Inheritance: A class inherits from a single superclass.
+
+- Multiple Interface Inheritance: A class implements multiple interfaces.
+
+- Overriding: A subclass provides a specific implementation for a method that is already defined in its superclass.
+
+- Super: A subclass refers to its direct superclass.
+
+</v-clicks>
+
+---
+class: flex flex-col justify-center items-center h-[100vh] space-y-4
+---
+
+https://qrco.de/be1p4R
+
+<img src="public/QR.png" alt="Alt Text" style="width: 40%; height: auto;" />
+
+
+---
 transition: slide-up
 
 level: 3
@@ -213,6 +238,166 @@ Clinic "1" *-- "*" Treatment : has >
 ---
 transition: slide-up
 
+level: 3
+---
+
+# Data classes
+
+### Immutability in Data Classes
+
+<v-clicks>
+
+- Safety and Predictability: Once a variable is set, it can't be changed, leading to more reliable code.
+
+- Kotlin's Embrace of Immutability: Variables declared with val in data classes can't be reassigned.
+
+- Usage of copy(): To change some properties while keeping others the same.
+
+- Spring Boot Aspect:
+  - In REST APIs, immutable DTOs ensure data consistency across multiple concurrent requests.
+
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+
+# Example DTO
+
+```kotlin {all|1-6|8-11}
+data class AppointmentRequest(
+    val patientId: String,
+    val dentalPractitionerId: String,
+    val dateTime: LocalDateTime,
+    val treatmentId: String,
+)
+
+data class AppointmentResponse(
+    val id: String? = null,
+    val message: String,
+)
+```
+
+---
+transition: slide-up
+
+level: 3
+---
+
+# Serialization of Data Classes
+
+<v-clicks>
+
+- Transforming Data: Convert objects to formats like JSON for storage or transmission.
+
+- Auto Serialization: Kotlin data classes are naturally suited for serialization due to their simplicity.
+
+- Kotlin's kotlinx.serialization: Provides native serialization capabilities.
+
+- Spring Boot Aspect:
+  - Uses the Jackson library by default for JSON serialization, seamlessly working with Kotlin data classes. 
+  - Data classes can be easily used as request and response bodies in Spring Boot's REST controllers.
+
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+
+# Example DTO usage
+
+```kotlin {all|3,4}
+@PostMapping
+fun scheduleAppointment(
+    @Valid @RequestBody appointmentRequest: AppointmentRequest,
+): ResponseEntity<AppointmentResponse> {
+    // ...
+}
+```
+
+---
+transition: slide-up
+
+level: 3
+---
+
+# Enums
+
+### Enum Constants
+
+<v-clicks>
+
+- Represent unique, unmodifiable instances of the enum class.
+
+- Accessible directly through the enum class, e.g., `TreatmentType.CHECKUP`.
+
+- Useful for fixed sets of values
+
+- Enums inherently follow the Singleton design pattern
+
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+
+### Properties and Methods in Enum Classes
+
+<v-clicks>
+
+- Enums can have properties, methods, and implement interfaces.
+
+```kotlin {all|1-5}
+enum class TreatmentType(
+    val displayName: String,
+    val duration: Duration,
+) {
+    CHECK_UP("Check-up", Duration.ofMinutes(30)),
+    CLEANING("Cleaning", Duration.ofMinutes(60)),
+    TOOTH_EXTRACTION("Tooth Extraction", Duration.ofMinutes(90)),
+    FILLING("Filling", Duration.ofMinutes(120)),
+    ROOT_CANAL("Root Canal", Duration.ofMinutes(120));
+}
+
+```
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+
+### Abstract Methods in Enum Classes
+
+<v-clicks>
+
+- Allows for different behavior across enum constants.
+- Each constant provides its own implementation.
+- A strategy pattern in practice, choosing algorithms at runtime
+
+```kotlin {all|2-6}
+enum class TreatmentType(val displayName: String) {
+    CHECK_UP("Check-up") {
+        override fun getDuration() = Duration.ofMinutes(30)
+    },
+    // the rest of the enums
+    abstract fun getDuration(): Duration
+}
+
+```
+</v-clicks>
+
+
+---
+transition: slide-up
+
 level: 2
 ---
 # Object keyword
@@ -231,10 +416,6 @@ level: 2
 ---
 # Generics
 
----
-level: 2
----
-# Generics
 
 ---
 level: 2
