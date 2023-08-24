@@ -53,12 +53,12 @@ Accelerate your programming skills by mastering the Object Oriented Programming 
 
 - 📘 **Master Object-Oriented Programming (OOP)** - Explore the fundamental elements of OOP in Kotlin.
 
-- 💻 **Apply OOP Principles with Spring Boot** - Solidify your grasp of OOP by integrating its concepts into a 'Dentist Clinic' Spring Boot application.
+- 🌱 **Apply OOP Principles with Spring Boot** - Solidify your grasp of OOP by integrating its concepts into a 'Dentist Clinic' Spring Boot application.
 
-- 🏁 **Craft a REST API** - Illuminate and test your application through a RESTful interface, leveraging Swagger and unit tests.
+- 🌐 **Craft a REST API** - Illuminate and test your application through a RESTful interface, leveraging Swagger and unit tests.
 
-- 🎒 **Engaging Take-Home Assignments** - Undertake practical coding challenges to enhance your application's range and depth.
-
+- 🎒 **Take-Home Assignments** - Undertake practical coding challenges to enhance your application's range and depth.
+  
 </v-clicks>
 
 <style>
@@ -85,6 +85,62 @@ layout: default
 
 <Toc minDepth="2" maxDepth="2"></Toc>
 
+---
+transition: slide-up
+level: 2
+---
+
+# What is Spring boot?
+
+<v-clicks>
+
+- **Open-Source Micro Web Framework**: Streamlines creation of production ready web applications.
+
+- **Stand-Alone & Production-Ready**: Build and run robust apps without external servers.
+
+- **Spring-Based**: Extends the popular Spring framework for enhanced capabilities.
+
+- **Simplified Development**: Auto-configurations and tools streamline the process.
+
+- **Cloud-Ready**: Designed for modern cloud deployments and scalability.
+
+</v-clicks>
+
+---
+transition: slide-up
+level: 3
+---
+
+# Why Spring Boot?
+
+<v-clicks>
+
+- Auto Configuration: Reduces the need for specifying beans in the configuration file.
+
+- Standalone: No need for an external server. It has an embedded Tomcat, Jetty, or Undertow.
+
+- Production Ready: Built-in features like health checks and metrics
+
+</v-clicks>
+
+---
+transition: slide-up
+level: 3
+---
+
+# Relation to Object-Oriented Programming (OOP):
+
+<v-clicks>
+
+- **Framework Structure**: Spring Boot, like most frameworks, is built on OOP principles. Its design patterns, components, and configurations are all rooted in OOP concepts.
+
+- **Beans and Components**: At the core of Spring are "beans"—objects managed by the Spring container. Understanding object creation, lifecycle, and interactions is vital.
+
+- **Clear Abstraction & Polymorphism**: Services, Controllers, Repositories in Spring Boot make heavy use of inheritance and polymorphism.
+
+- **Why Learn OOP First**: Grasping OOP is key to understanding how components in Spring Boot interact.
+
+</v-clicks>
 
 ---
 transition: slide-up
@@ -321,9 +377,19 @@ fun scheduleAppointment(
 
 ---
 transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Identify which classes could be data classes and update the app!
+
+---
+transition: slide-up
 
 level: 3
 ---
+
+
 
 # Enums
 
@@ -347,7 +413,7 @@ transition: slide-up
 level: 3
 ---
 
-### Properties and Methods in Enum Classes
+# Properties and Methods in Enum Classes
 
 <v-clicks>
 
@@ -374,7 +440,7 @@ transition: slide-up
 level: 3
 ---
 
-### Abstract Methods in Enum Classes
+# Abstract Methods in Enum Classes
 
 <v-clicks>
 
@@ -394,6 +460,13 @@ enum class TreatmentType(val displayName: String) {
 ```
 </v-clicks>
 
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: add enum
 
 ---
 transition: slide-up
@@ -402,12 +475,214 @@ level: 2
 ---
 # Object keyword
 
+Object keyword in Kotlin serves multiple purposes: singletons, companion objects, and object expressions. Allows declaration and instantiation of a class simultaneously.
+
+<v-clicks>
+
+### Singleton Pattern with object
+
+- Ensures a class has only one instance.
+- Useful for system-wide actions, especially in multi-threaded scenarios.
+
+```kotlin {all}
+object Clinic {
+    val patients = mutableMapOf<String, Patient>()
+    val dentists = mutableMapOf<String, Dentist>()
+    val treatments = mutableMapOf<String, Treatment>()
+    val appointments = mutableListOf<Appointment>()
+    // the rest of the object
+}
+
+```
+</v-clicks>
+
 ---
 transition: slide-up
 
+level: 3
+---
+### Companion Objects
+
+<v-clicks>
+
+- Functions, properties and constants can be defined on a class level using companion objects.
+
+- Useful for defining class level constants, factory methods, and functionality related to a class.
+
+
+```kotlin {all|4-8}
+data class Treatment(val id: String, val name: String, val type: TreatmentType) {
+    // the rest of the instance members
+    companion object {
+        fun teethCleaning() = Treatment(
+            "T001",
+            "Teeth Cleaning",
+            TreatmentType.CLEANING
+        )
+        // other factory methods 
+    }
+}
+```
+
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+
+# Object Expressions
+
+<v-clicks>
+
+- Enables concise class definition and instantiation in a single expression.
+
+- Typically used for listeners or one-time-use scenarios.
+
+```kotlin
+val appointmentListener = object : AppointmentListener {
+    override fun onAppointmentScheduled(appointment: Appointment) {
+        // handle the event
+    }
+}
+
+```
+
+</v-clicks>
+
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: use object keyword
+
+---
+transition: slide-up
+layout: section
 level: 2
 ---
 # Inheritance, Interfaces and Polymorphism
+
+---
+transition: slide-up
+
+level: 3
+---
+# Inheritance
+Allows creation of a new class based on an existing one. Aims at code reusability and maintainability.
+
+<v-clicks>
+
+### Terminology
+
+- Superclass (Parent): Class being extended (e.g., `Person`).
+- Subclass (Child): Class that inherits from another (e.g., `Dentist`, `Patient`).
+
+```plantuml
+@startuml
+class Person {
+}
+
+class Dentist {
+}
+
+class Patient {
+}
+
+Dentist -up-|> Person : implements
+Patient -up-|> Person : implements
+@enduml
+```
+
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+### Open and override keywords
+
+- Classes are final by default in Kotlin. 
+- Use `open` to allow inheritance. 
+- Use `override` keyword to customize inherited methods/properties.
+
+```kotlin {all|5,12}
+open class Person(
+    open val id: String,
+    open val name: String,
+) {
+    open fun introduce() = "Hello, my name is $name."
+}
+class Dentist(
+    id: String,
+    name: String,
+) : Person(id, name) {
+
+    override fun introduce() = "${super.introduce()} I'm a dentist."
+}
+
+```
+
+---
+transition: slide-up
+
+level: 3
+---
+### Super Keyword
+
+- References the immediate superclass.
+- Useful for retaining superclass functionality while adding subclass-specific behavior.
+
+```kotlin
+ override fun introduce() = "${super.introduce()} I'm a patient."
+```
+
+---
+transition: slide-up
+
+level: 3
+---
+### Constructors in Inheritance
+
+- Superclass constructor called first.
+- Ensures superclass properties are initialized prior to subclass.
+
+```kotlin
+class Patient(
+    id: String,
+    name: String,
+) : Person(id, name) {
+    var insurance: String? = null
+    // The rest of the Patient class initialisation
+    constructor(id: String, name: String, insurance: String)
+            : this(id, name) {
+        println("Secondary constructor called. Insurance: $insurance")
+        this.insurance = insurance
+    }
+    // The rest of the Patient class
+}
+
+```
+
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: add inheritance
+
+---
+transition: slide-up
+
+level: 3
+---
+# Interfaces
+
 
 ---
 transition: slide-up
