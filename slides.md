@@ -171,7 +171,7 @@ class Patient {
 }
 class DentalRecord {
 }
-Patient --> DentalRecord : has-a
+Patient o-- DentalRecord : has-a
 
 @enduml
 ```
@@ -267,8 +267,7 @@ class Treatment
 Appointment o-- Patient : Has
 Appointment o-- Dentist : Has
 Appointment o-- Treatment : Involves
-Dentist -- Patient : Performs treatment on
-Patient o-- DentalRecord : Has
+Patient o-- "*" DentalRecord : Has
 DentalRecord o-- Treatment : Records
 
 @enduml
