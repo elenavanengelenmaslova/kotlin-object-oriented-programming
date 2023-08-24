@@ -98,9 +98,9 @@ level: 2
 
 - **Stand-Alone & Production-Ready**: Build and run robust apps without external servers.
 
-- **Spring-Based**: Extends the popular Spring framework for enhanced capabilities.
+- **Spring-Based**: Builds upon the Spring framework, utilizing its Inversion of Control (IoC) and integration with various data sources, cloud, security mechanisms, and other tools.
 
-- **Simplified Development**: Auto-configurations and tools streamline the process.
+- **Simplified Development**: Provides auto-configurations and built-in features for a streamlined development experience.
 
 - **Cloud-Ready**: Designed for modern cloud deployments and scalability.
 
@@ -138,7 +138,7 @@ level: 3
 
 - **Clear Abstraction & Polymorphism**: Services, Controllers, Repositories in Spring Boot make heavy use of inheritance and polymorphism.
 
-- **Why Learn OOP First**: Grasping OOP is key to understanding how components in Spring Boot interact.
+- **Why Learn OOP**: Grasping OOP is key to understanding how components in Spring Boot interact.
 
 </v-clicks>
 
@@ -158,6 +158,7 @@ level: 3
 ---
 
 # Class relationships
+Two main types of relationships, "has-a" or composition and "is-a" or inheritance.
 
 ### "Has-a" Relationships (Composition)
 Example: A `Patient` class **has a** `DentalRecord`.
@@ -283,10 +284,10 @@ class Dentist
 class Patient
 class Treatment
 
-Clinic "1" *-- "*" Appointment : has >
-Clinic "1" *-- "*" Dentist : has >
-Clinic "1" *-- "*" Patient : has >
-Clinic "1" *-- "*" Treatment : has >
+Clinic "1" o-- "*" Appointment : has >
+Clinic "1" o-- "*" Dentist : has >
+Clinic "1" o-- "*" Patient : has >
+Clinic "1" o-- "*" Treatment : has >
 @enduml
 
 ```
@@ -682,6 +683,13 @@ transition: slide-up
 level: 3
 ---
 # Interfaces
+
+---
+transition: slide-up
+
+level: 3
+---
+# Polymorphism
 
 
 ---
