@@ -238,7 +238,7 @@ class: flex flex-col justify-center items-center h-[100vh] space-y-4
 
 https://qrco.de/be1p4R
 
-<img src="QR.png" alt="Alt Text" style="width: 40%; height: auto;" />
+<img src="/QR.png" alt="Alt Text" style="width: 40%; height: auto;" />
 
 
 ---
