@@ -229,7 +229,7 @@ Hygienist -up-|> DentalPractitioner : implements
 
 - Overriding: A subclass provides a specific implementation for a method that is already defined in its superclass.
 
-- Super: A subclass refers to its direct superclass.
+- `super`: A subclass refers to its direct superclass.
 
 </v-clicks>
 
@@ -305,12 +305,12 @@ level: 3
 
 - Safety and Predictability: Once a variable is set, it can't be changed, leading to more reliable code.
 
-- Kotlin's Embrace of Immutability: Variables declared with val in data classes can't be reassigned.
+- Kotlin's Embrace of Immutability: Variables declared with `val` in data classes can't be reassigned.
 
-- Usage of copy(): To change some properties while keeping others the same.
+- Usage of `copy()`: To change some properties while keeping others the same.
 
 - Spring Boot Aspect:
-  - In REST APIs, immutable DTOs ensure data consistency across multiple concurrent requests.
+  - In REST APIs, immutable DTOs (Data Transfer Objects) ensure data consistency across multiple concurrent requests.
 
 </v-clicks>
 
@@ -346,7 +346,7 @@ level: 3
 
 <v-clicks>
 
-- Transforming Data: Convert objects to formats like JSON for storage or transmission.
+- Transforming Data: Convert objects to formats like JSON (JavaScript Object Notation) for storage or transmission.
 
 - Auto Serialization: Kotlin data classes are naturally suited for serialization due to their simplicity.
 
