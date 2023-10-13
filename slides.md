@@ -803,7 +803,7 @@ level: 3
 
 <v-clicks>
 
-- **Subtype Polymorphism**: A method operates on objects of various types, facilitated by inheritance.
+- **Subtype Polymorphism**: A method operates on objects of various types, facilitated by inheritance. 
 
 - **Method Overriding**: Subclasses provide specific method implementations from their superclass using override.
 
@@ -817,7 +817,6 @@ level: 3
 open class Person {
   open fun introduce() = "Hello, my name is $name."
 }
-
 class Patient : Person() {
   override fun introduce() = "${super.introduce()} I am a patient."
 }
@@ -1019,7 +1018,7 @@ level: 3
 
 - **Utility**: Effective handling of varied responses or outcomes
 
-- **Strength**: Enhanced when used with Kotlin's when expressions
+- **Strength**: Enhanced when used with `when` expressions
 
 - **Application**: Enables exhaustive handling of each type
 
@@ -1034,7 +1033,7 @@ level: 3
 
 <v-clicks>
 
-- **Sealed Classes**: Defined using sealed keyword, all direct subclasses in the same file
+- **Sealed Classes**: Defined using sealed keyword, all subclasses must be declared in the same package
 
 - **Sealed Interfaces**: Similar to sealed classes but allow multi-inheritance
 
@@ -1059,6 +1058,14 @@ sealed class PatientStatus {
 
 </v-clicks>
 
+
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: add sealed classes
 
 ---
 transition: slide-up
@@ -1113,12 +1120,143 @@ val email = Email("alice@example.com")
 </v-clicks>
 
 
+
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: use value classes
+
+
 ---
 transition: slide-up
 layout: section
 level: 2
 ---
-# Smart casts and Destructuring declarations
+# Smart Casts and Destructuring Declarations
+
+
+---
+transition: slide-up
+
+level: 3
+---
+# Smart Casts
+
+<v-clicks>
+
+- Smart Casts: Kotlin’s automatic type casting when deemed safe.
+
+- Purpose: Reduces boilerplate, prevents runtime class cast exceptions, and ensures type safety.
+
+</v-clicks>
+
+<v-clicks>
+
+```kotlin
+if (person != null && person is Dentist) {
+    return person  // Kotlin handles the cast to Dentists.
+}
+```
+
+</v-clicks>
+
+<v-clicks>
+
+- Integration: Works seamlessly with Kotlin's null safety mechanism.
+
+- Caveat: Best with immutable variables (val). Challenges arise with mutable (var) ones.
+
+</v-clicks>
+
+
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: leverage smart casts
+
+
+
+---
+transition: slide-up
+
+level: 3
+---
+# Destructuring Declarations - Introduction
+Breaking down objects into parts, enhancing code readability. 
+
+
+<v-clicks>
+
+**Definition**: Allows for breaking down objects into its parts. Especially beneficial with data classes.
+
+```kotlin
+data class Appointment(val id: String, val patient: Patient, val time: LocalDateTime)
+val (_, patient, time) = appointment
+```
+
+</v-clicks>
+
+<v-clicks>
+
+**Usage in Assignments**: Enables direct variable assignment from complex objects
+```kotlin
+val (_, patient, time) = Clinic.getAppointmentById(appointmentId)
+```
+
+</v-clicks>
+
+
+---
+transition: slide-up
+
+level: 3
+---
+# Destructuring Declarations - Usage
+Reduce boilerplate code, enhance readability
+
+<v-clicks>
+
+**Destructuring in Loops**: Simplifies iteration over lists or collections of objects.
+```kotlin
+for ((id, patient, time) in appointments) {
+  println("ID: $id, Patient: $patient, Time: $time.")
+}
+   
+```
+
+</v-clicks>
+
+<v-clicks>
+
+**With Lambdas**: Increases clarity in lambda expressions, particularly useful with maps.
+
+```kotlin
+treatments.forEach { (id, treatment) ->
+  println("Treatment ID: $id, Details: $treatment")
+}
+```
+
+</v-clicks>
+
+<v-clicks>
+
+**Key Consideration**: Order is crucial in destructuring. The sequence of destructured variables should match the object's properties.
+
+</v-clicks>
+
+---
+transition: slide-up
+layout: section
+level: 3
+---
+
+# 💻 Hands-on: use destructuring declarations
 
 ---
 transition: slide-up
@@ -1126,6 +1264,91 @@ layout: section
 level: 2
 ---
 # Annotations
+
+
+---
+transition: slide-up
+
+level: 3
+---
+# Annotations - Introduction
+
+<v-clicks>
+
+- **Purpose**: Annotations provide metadata without altering code's runtime behavior.
+
+- **Types**: Built-in annotations and custom annotations.
+
+- **Optimization**: Annotations like `@JvmName`, `@JvmStatic`, etc. help in optimizing Kotlin's bytecode generation.
+
+</v-clicks>
+
+<v-clicks>
+
+```kotlin
+@Deprecated("Use another method.")
+fun oldMethod() { ... }
+```
+
+</v-clicks>
+
+---
+transition: slide-up
+
+level: 3
+---
+# Custom Annotations
+Create your own annotation.
+
+<v-clicks>
+
+**Custom annotations**: Address specific intentions or requirements. 
+
+</v-clicks>
+
+<v-clicks>
+
+**Example**: ValidPatientId enforces ID validation standardization.
+```kotlin 
+@Target(AnnotationTarget.FIELD)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ValidPatientId(val message: String)
+```
+</v-clicks>
+
+<v-clicks>
+
+**@Target**: Specifies where the annotation can be applied (e.g., AnnotationTarget.FIELD).
+
+**@Retention**: Annotation's lifecycle (e.g., retained at runtime).
+
+</v-clicks>
+
+
+---
+transition: slide-up
+
+level: 3
+---
+# Annotation Targets in Kotlin
+
+<v-clicks>
+
+- **AnnotationTarget.FIELD**: Apply annotation on fields.
+
+- **AnnotationTarget.PROPERTY_GETTER**: For property getters.
+
+- **Use-site targets**: Direct compiler to apply annotation at specific places.
+
+</v-clicks>
+
+<v-clicks>
+
+```kotlin {all|1|2}
+data class AppointmentRequest(@ValidPatientId val patientId: String)
+class Request { @set:ValidPatientId var patientId: String = "" }
+```
+</v-clicks>
 
 ---
 level: 2
